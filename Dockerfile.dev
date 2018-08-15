@@ -1,0 +1,11 @@
+FROM ruby:2.5.1
+
+RUN mkdir /app
+ADD . /app
+WORKDIR /app
+
+EXPOSE  3000
+
+RUN bin/bundle install
+RUN bin/rails db:migrate
+CMD bin/rails s

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lunapi-app
+  labels:
+    app: lunapi
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: lunapi
+  template:
+    metadata:
+      labels:
+        app: lunapi
+    spec:
+      containers:
+      - name: lunapi
+        image: localhost:5000/lunapi-vx     # ビルドしたらちゃんと変えておく
+        ports:
+        - containerPort: 3000
