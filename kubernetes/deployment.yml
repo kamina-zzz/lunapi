@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: lunapi
-        image: localhost:5000/lunapi-vx     # ビルドしたらちゃんと変えておく
+        image: localhost:5000/lunapi
         ports:
         - containerPort: 3000
