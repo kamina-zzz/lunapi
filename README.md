@@ -12,16 +12,27 @@ Lunapi is 高可用性を備えたとりあえず k8s 上で動く Rails アプ�
 
 ## how to use
 
+### デプロイ
+
 ```sh
 $ docker build -t lunapi:latest -f Dockerfile.dev .
 # プライベートレジストリを立てておく ( 今回は localhost:5000 に立てた )
-$ docker tag lunapi:latest localhost:5000/lunapi-vx
-$ docker push localhost:5000/lunapi-vx
+$ docker tag lunapi:latest localhost:5000/lunapi
+$ docker push localhost:5000/lunapi
 $ kubectl create -f kubernetes/deployment.yml
 $ kubectl create -f kubernetes/service.yml
 # kubectl describe service/lunapi-lb して NordPort を確認しておく
 $ curl -s localhost:3XXXX/host
 {"host":"lunapi-app-xxxxxxxxxx-xxxxx\n"}
+```
+
+### ローリングアップデート
+
+```sh
+# アプリケーションコードを修正して再度 build, tag, push する
+$ kubectl set image deployment.apps/lunapi-app lunapi=localhost:5000/lunapi:latest
+$ kubectl rollout status deployment.apps/lunapi-app
+# rollout の様子が出力される
 ```
 
 ## いろいろ
