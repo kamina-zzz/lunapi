@@ -2,4 +2,5 @@
 /log/*
 /tmp/*
 /storage/*
+/kubernetes/*
 .byebug_history
